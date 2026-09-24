@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary " v-if="$route.meta.showNavbar !== false">
+
+    <div class="collapse navbar-collapse p-1 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" id="navbarNav">
+        <ul class="navbar-nav gap-3 " v-if="userRole === 'regular user'">
+            <li class="nav-item" >
+                <router-link to="/home" class="nav-link btn btn-outline-warning border border-danger">Home</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/cart" class="nav-link btn btn-outline-warning border border-danger">Cart</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/profile" class="nav-link btn btn-outline-warning border border-danger">Profile</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/logout" class="nav-link mr btn btn-danger border border-danger">Logout</router-link>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav gap-3 " v-if="userRole === 'admin'">
+            <li class="nav-item" >
+                <router-link to="/admin_dashboard" class="nav-link btn btn-outline-warning border border-danger">Admin Dashboard</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link  to="/admin_management" class="nav-link btn btn-outline-warning border border-danger">Admin Management</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/home" class="nav-link btn btn-outline-warning border border-danger">User Page</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/cart" class="nav-link btn btn-outline-warning border border-danger">Cart</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/profile" class="nav-link btn btn-outline-warning border border-danger">Profile</router-link>
+            </li>
+            <li class="nav-item" >
+                <router-link to="/summary" class="nav-link btn btn-outline-warning border border-danger">Summary</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/logout" class="nav-link mr btn btn-danger border border-danger">Logout</router-link>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav gap-3 " v-if="userRole === 'manager'">
+            <li class="nav-item" >
+                <router-link  to="/manager_dashboard" class="nav-link btn btn-outline-warning border border-danger">Manager Dashboard</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/home" class="nav-link btn btn-outline-warning border border-danger">User Page</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/cart" class="nav-link btn btn-outline-warning border border-danger">Cart</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/profile" class="nav-link btn btn-outline-warning border border-danger">Profile</router-link>
+            </li>
+            <li class="nav-item">
+                <router-link to="/logout" class="nav-link mr btn btn-danger border border-danger">Logout</router-link>
+            </li>
+        </ul>
+    </div>
+</nav>
