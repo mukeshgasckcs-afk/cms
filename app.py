@@ -1,7 +1,2 @@
-from application import create_app
-
-if __name__=="__main__":
-    app = create_app()
-    
-    #app.run(debug=True)
-    app.run(debug=False,host = '0.0.0.0')
+# Deprecated: Python Flask backend has been migrated to pure JavaScript.
+# The application now runs directly as a Single Page Application (SPA) on Netlify via index.html and js/main.js.

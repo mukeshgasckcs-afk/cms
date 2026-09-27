@@ -1,0 +1,20 @@
+{
+  "name": "courier-management-system",
+  "version": "2.0.0",
+  "description": "Courier Management System Single Page Application ready for Netlify deployment",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "serve": "npx serve ."
+  },
+  "keywords": [
+    "courier",
+    "management",
+    "system",
+    "vue3",
+    "javascript",
+    "netlify"
+  ],
+  "author": "Shib Kumar Saraf",
+  "license": "MIT"
+}

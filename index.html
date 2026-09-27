@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courier Management System</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      background-image: 
+        linear-gradient(rgba(248, 250, 252, 0.94), rgba(241, 245, 249, 0.97)),
+        url('System/application/static/bg_image.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .navbar-custom {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      margin-top: 12px;
+      margin-bottom: 24px;
+      padding: 10px 20px;
+    }
+
+    .nav-link.custom-btn {
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
+      border: 1px solid transparent;
+    }
+
+    .nav-link.custom-btn:hover {
+      background-color: #fee2e2;
+      color: #dc2626 !important;
+    }
+
+    .router-link-active.custom-btn {
+      background-color: #dc2626 !important;
+      color: #ffffff !important;
+      font-weight: 600;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.2s ease;
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+      opacity: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid px-md-4" id="app">
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom" v-if="$route.meta.showNavbar !== false && userRole">
+      <div class="container-fluid px-0">
+        <router-link to="/home" class="navbar-brand fw-bold text-danger d-flex align-items-center gap-2">
+          <span>📦</span> CourierMS
+        </router-link>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+          aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <!-- REGULAR USER NAVIGATION -->
+          <ul class="navbar-nav ms-auto gap-2 align-items-lg-center" v-if="userRole === 'regular user'">
+            <li class="nav-item">
+              <router-link to="/home" class="nav-link custom-btn text-dark">
+                <i class="bi bi-house"></i> Home
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/cart" class="nav-link custom-btn text-dark">
+                <i class="bi bi-cart"></i> Cart
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/profile" class="nav-link custom-btn text-dark">
+                <i class="bi bi-person"></i> Profile
+              </router-link>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <button @click="logout" class="btn btn-sm btn-outline-danger px-3">
+                <i class="bi bi-box-arrow-right"></i> Logout
+              </button>
+            </li>
+          </ul>
+
+          <!-- ADMIN NAVIGATION -->
+          <ul class="navbar-nav ms-auto gap-2 align-items-lg-center" v-if="userRole === 'admin'">
+            <li class="nav-item">
+              <router-link to="/admin_dashboard" class="nav-link custom-btn text-dark">
+                <i class="bi bi-geo-alt"></i> Hub Locations
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/admin_management" class="nav-link custom-btn text-dark">
+                <i class="bi bi-people"></i> Requests
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/summary" class="nav-link custom-btn text-dark">
+                <i class="bi bi-bar-chart"></i> Summary
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/home" class="nav-link custom-btn text-dark">
+                <i class="bi bi-plus-circle"></i> New Courier
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/cart" class="nav-link custom-btn text-dark">
+                <i class="bi bi-cart"></i> Cart
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/profile" class="nav-link custom-btn text-dark">
+                <i class="bi bi-person"></i> Profile
+              </router-link>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <button @click="logout" class="btn btn-sm btn-outline-danger px-3">
+                <i class="bi bi-box-arrow-right"></i> Logout
+              </button>
+            </li>
+          </ul>
+
+          <!-- MANAGER NAVIGATION -->
+          <ul class="navbar-nav ms-auto gap-2 align-items-lg-center" v-if="userRole === 'manager'">
+            <li class="nav-item">
+              <router-link to="/manager_dashboard" class="nav-link custom-btn text-dark">
+                <i class="bi bi-truck"></i> Manager Dashboard
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/home" class="nav-link custom-btn text-dark">
+                <i class="bi bi-plus-circle"></i> New Courier
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/cart" class="nav-link custom-btn text-dark">
+                <i class="bi bi-cart"></i> Cart
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/profile" class="nav-link custom-btn text-dark">
+                <i class="bi bi-person"></i> Profile
+              </router-link>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <button @click="logout" class="btn btn-sm btn-outline-danger px-3">
+                <i class="bi bi-box-arrow-right"></i> Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN ROUTED VIEW -->
+    <main>
+      <router-view></router-view>
+    </main>
+  </div>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+
+  <!-- Vue 3 & Vue Router 4 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/vue-router@4.2.5/dist/vue-router.global.js"></script>
+
+  <!-- Main ES Module Application Script -->
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
